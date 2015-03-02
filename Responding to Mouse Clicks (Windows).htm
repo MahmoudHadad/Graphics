@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml" lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><link rel="canonical" href="https://msdn.microsoft.com/en-us/library/windows/desktop/gg153548%28v=vs.85%29.aspx">
+        <title>Responding to Mouse Clicks (Windows)</title>
+
+
+
+
+
+<meta name="DCS.dcsuri" content="/en-us/library/windows/desktop/gg153548(d=default,l=en-us,v=vs.85).aspx">
+
+<meta name="NormalizedUrl" content="https://msdn.microsoft.com/en-us/library/windows/desktop/gg153548(d=default,l=en-us,v=vs.85).aspx">
+
+<meta name="ms.normalizedurl" content="https://msdn.microsoft.com/en-us/library/windows/desktop/gg153548(d=default,l=en-us,v=vs.85).aspx">
+
+<meta name="VotingContextUrl" content="https://msdn.microsoft.com/en-us/library/windows/desktop/gg153548(d=default,l=en-us,v=vs.85).aspx">
+
+<meta name="MN" content="BF1CA939-4:27:24 AM">
+
+<meta name="Search.ShortId" content="gg153548">
+
+<meta name="ms.shortidmsdn" content="gg153548">
+
+<meta name="Ms.Locale" content="en-us">
+
+<meta name="ms.prodver" content="VS.85">
+
+<meta name="ms.contentlang" content="EN">
+
+<meta name="ms.lang" content="EN">
+
+<meta name="ms.loc" content="US">
+
+<meta name="ms.sitever" content="2015.02.18.4">
+
+<meta name="ms.assetid" content="FED1CA3B-94C6-4780-B82D-C10171F36D98">
+
+<meta name="ms.auth" content="0">
+
+
+
+
+
+
+
+
+        
+    <link rel="shortcut icon" href="https://msdn.microsoft.com/Areas/Epx/Themes/Windows/Content/Winlogo_favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="Responding%20to%20Mouse%20Clicks%20%28Windows%29_files/Combined.css"><script src="Responding%20to%20Mouse%20Clicks%20%28Windows%29_files/ms.js" async="" type="text/javascript"></script><script async="" src="Responding%20to%20Mouse%20Clicks%20%28Windows%29_files/ai.js" type="text/javascript"></script><script class="mtps-injected">try {
+/**/
+(window.MTPS || (window.MTPS = {})).cdnDomains || (window.MTPS.cdnDomains = { 
+	"image": "https://i-msdn.sec.s-msft.com", 
+	"js": "https://i2-msdn.sec.s-msft.com", 
+	"css": "https://i-msdn.sec.s-msft.com", 
+	"xap": "https://msdn.microsoft.com"
+});
+/**/
+} finally { MTPS._injectNextScript_0 && MTPS._injectNextScript_0(); }</script><script src="Responding%20to%20Mouse%20Clicks%20%28Windows%29_files/jquery-1.js" class="mtps-injected"></script><script class="mtps-injected">try {
+//
+  var literalNormalizedUrl = '/en-us/library/windows/desktop/gg153548(l=en-us,v=vs.85).aspx';
+  var wt_nvr_ru = 'WT_NVR_RU';
+  var wt_fpcdom = '.microsoft.com';
+  var wt_domlist = 'msdn.microsoft.com';
+  var wt_pathlist = '';
+  var wt_paramlist = 'DCSext.mtps_devcenter';
+  var wt_siteid = 'MSDN';
+  var gDomain = 'm.webtrends.com';
+  var gDcsId = 'dcsmgru7m99k7mqmgrhudo0k8_8c6m';
+  var gFpc = 'WT_FPC';
+
+
+
+  if (document.cookie.indexOf(gFpc + "=") == -1) {
+    var wtidJs = document.createElement("script");
+    wtidJs.src = "//" + gDomain + "/" + gDcsId + "/wtid.js";
+    document.getElementsByTagName("head")[0].appendChild(wtidJs);
+  }
+
+
+
+  var detectedLocale = 'en-us';
+  var wtsp = '_msdn_';
+  var gTrackEvents = '0';
+/**/
+} finally { MTPS._injectNextScript_2 && MTPS._injectNextScript_2(); }</script><script class="mtps-injected">try {
+/**/
+  var omni_guid = "e9e0b8a1-ff18-40d0-b376-54ee5e39538c";
+/**/
+} finally { MTPS._injectNextScript_3 && MTPS._injectNextScript_3(); }</script><script class="mtps-injected">try {
+//
+
+            window.appInsightsId = '60854590-027a-4ae4-98be-2741a40f355f';
+            //
+} finally { MTPS._injectNextScript_4 && MTPS._injectNextScript_4(); }</script><script src="Responding%20to%20Mouse%20Clicks%20%28Windows%29_files/Combined_002.js" class="mtps-injected"></script><meta content="windows desktop" name="ms.Center"><meta content="windows desktop: learn" name="ms.Section"><meta content="gg153548" name="ms.ShortId"><meta content="windows desktop: learn: gg153548" name="ms.TOC"><script src="Responding%20to%20Mouse%20Clicks%20%28Windows%29_files/SearchBox.js" class="mtps-injected"></script><script src="Responding%20to%20Mouse%20Clicks%20%28Windows%29_files/Combined_003.js" class="mtps-injected"></script><script src="Responding%20to%20Mouse%20Clicks%20%28Windows%29_files/jquery.js" class="mtps-injected"></script><script src="Responding%20to%20Mouse%20Clicks%20%28Windows%29_files/Combined.js" class="mtps-injected"></script><script src="Responding%20to%20Mouse%20Clicks%20%28Windows%29_files/broker.js"></script><script class="mtps-injected">try {
+$(document).ready(function() {
+        try {
+            var token = $("#globalRequestVerification input[name='__RequestVerificationToken']").clone();
+            $("#siteFeedbackForm").append(token);
+        } catch(err) {
+            
+        }
+    });
+} finally { MTPS._injectNextScript_10 && MTPS._injectNextScript_10(); }</script><link media="print" type="text/css" rel="stylesheet" href="Responding%20to%20Mouse%20Clicks%20%28Windows%29_files/PrintView.css"></head>
+    <body class="library FF FF3">
+        <div id="page">
+            
+
+            
+            
+            
+    
+    
+
+    <div id="ux-header" class="ltr en-us">
+        <div id="headerContainer">
+            <div id="logoAndSearchBox">
+                <div id="logo">
+                    <a href="https://msdn.microsoft.com/windows/desktop" title="Windows"><img alt="Windows" src="Responding%20to%20Mouse%20Clicks%20%28Windows%29_files/Windows_logo.png"></a>
+                </div>
+
+        <div id="selectedTab">
+            <a class="dropDownToggle" href="javascript:void(0);">Dev Center - Desktop</a>    
+        </div>
+    <div id="toclevel1_menu" style="display: none; left: 125px; top: 57px;">
+        <ul>
+                <li><a href="https://dev.windows.com/" title="Windows">Windows</a></li>
+                <li><a href="https://msdn.microsoft.com/windows/desktop/" title="Desktop">Desktop</a></li>
+                <li><a href="https://msdn.microsoft.com/windows/hardware/" title="Hardware">Hardware</a></li>
+                <li><a href="https://msdn.microsoft.com/ie/" title="Internet Explorer">Internet Explorer</a></li>
+        </ul>
+        <div style="clear: both"></div>
+    </div> 
+
+                
+
+    <div class="SearchBox">   
+        <form id="HeaderSearchForm" name="HeaderSearchForm" method="get" onsubmit="return Epx.Controls.SearchBox.searchBoxOnSubmit(this);">
+        <input autocomplete="off" id="HeaderSearchTextBox" name="query" maxlength="200" onfocus="Epx.Controls.SearchBox.watermarkFocus(event, this.title)" onblur="Epx.Controls.SearchBox.watermarkBlur(event, this.title)" type="text">            
+        <button title="Search" id="HeaderSearchButton" value="" type="submit" class="header-search-button"></button>
+        <div style="display: none; text-align: left; border: 1px solid buttonshadow; position: absolute; z-index: 1000; padding: 2px; background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); font-family: &quot;Segoe UI&quot;,&quot;Lucida Grande&quot;,Verdana,Arial,Helvetica,sans-serif; font-size: 12px;" id="SearchFlyoutContainer"><div id="SuggestionContainer"><ul style="list-style: outside none none; padding: 4px 2px 0px 1px; cursor: pointer; margin: 1px; white-space: nowrap;"></ul></div></div></form>
+         
+            
+             
+    
+    </div>
+
+                <div class="Clear"></div>
+            </div>
+            <div class="Clear"></div>
+            <div class="ux-internav"> 
+    <div class="toclevel2"> 
+            <a class="normal" href="https://sysdev.microsoft.com/en-us/desktop/" title="Dashboard">Dashboard</a>
+            <a class="active" href="https://msdn.microsoft.com/windows/desktop/bg161546.aspx" title="Get started">Get started</a>
+            <a class="normal" href="https://msdn.microsoft.com/windows/desktop/aa511258.aspx" title="Design">Design</a>
+            <a class="normal" href="https://msdn.microsoft.com/windows/desktop/aa904962.aspx" title="Develop">Develop</a>
+            <a class="normal" href="https://msdn.microsoft.com/windows/desktop/dn553326.aspx" title="Test and deploy">Test and deploy</a>
+            <a class="normal" href="https://msdn.microsoft.com/windows/desktop/jj134964.aspx" title="Certify">Certify</a>
+    </div>
+    <div class="clear"></div>
+            </div>
+            <div id="signIn">
+
+<a class="scarabLink" href="https://login.live.com/login.srf?wa=wsignin1.0&amp;rpsnv=12&amp;ct=1424435244&amp;rver=6.0.5276.0&amp;wp=MCMBI&amp;wlcxt=MSDN%24MSDN%24MSDN&amp;wreply=https%3a%2f%2fmsdn.microsoft.com%2fen-us%2flibrary%2fwindows%2fdesktop%2fgg153548%2528v%3dvs.85%2529.aspx&amp;lc=1033&amp;id=254354&amp;mkt=en-US" title="Sign in">Sign in</a></div>
+
+    
+
+        </div>
+        <div id="blackBar">            
+    <div class="toclevel3"> 
+            <a style="opacity: 1; left: 0px;" class="normal" href="https://msdn.microsoft.com/library/windows/desktop/dn614993.aspx" title="Choose your technology">Choose your technology</a>
+            <a style="opacity: 1; left: 0px;" class="normal" href="https://msdn.microsoft.com/library/windows/desktop/hh848361%28vs.85%29.aspx" title="What's new">What's new</a>
+            <a style="opacity: 1; left: 0px;" class="active" href="https://msdn.microsoft.com/windows/desktop/ee663266.aspx" title="Desktop programming">Desktop programming</a>
+            <a style="opacity: 1; left: 0px;" class="normal" href="https://msdn.microsoft.com/windows/desktop/aa904949.aspx" title="Downloads and tools">Downloads and tools</a>
+    </div>
+    <div class="clear"></div>
+        </div>
+    </div>
+
+
+
+            <div id="body">
+                
+
+
+
+
+
+
+
+    <div style="width: 280px; max-width: 480px; min-height: 3297px; height: 272px;" id="leftNav">
+
+
+
+<div style="width: 280px; position: fixed; top: 60px;" id="tocnav">
+
+            <div style="padding-left: 0px;" class="toclevel0" data-toclevel="0">
+<a class="toc_collapsed" href="#"></a><a data-tochassubtree="true" href="https://msdn.microsoft.com/en-us/library/windows/desktop/ff381399%28v=vs.85%29.aspx" id="ff381412_VS.85_en-us" mtpsaliasid="" mtpsassetid="a9470cb9-a1e7-4d6d-a4be-61b81d209ada_VS.85_en-us" mtpsshortid="ff381399_VS.85_en-us" title="Learn to Program for Windows in C++">Learn to Program for Windows in C++</a>            </div>
+            <div data-childrenloaded="true" style="padding-left: 13px;" class="toclevel1" data-toclevel="1">
+<a class="toc_expanded" href="#"></a><a data-tochassubtree="true" href="https://msdn.microsoft.com/en-us/library/windows/desktop/gg153547%28v=vs.85%29.aspx" id="ff685417_VS.85_en-us" mtpsaliasid="" mtpsassetid="C35FBC18-201B-4175-8977-9DAF3914E515_VS.85_en-us" mtpsshortid="gg153547_VS.85_en-us" title="Module 4. User Input">Module 4. User Input</a>            </div>
+            <div style="padding-left: 26px;" class="toclevel2" data-toclevel="2">
+<span class="toc_empty"></span><a href="https://msdn.microsoft.com/en-us/library/windows/desktop/gg153549%28v=vs.85%29.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="Mouse Input">Mouse Input</a>            </div>
+            <div style="padding-left: 26px;" class="toclevel2 current" data-toclevel="2">
+<span class="toc_empty"></span><a href="https://msdn.microsoft.com/en-us/library/windows/desktop/gg153548%28v=vs.85%29.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="Responding to Mouse Clicks">Responding to Mouse Clicks</a>            </div>
+            <div style="padding-left: 26px;" class="toclevel2" data-toclevel="2">
+<span class="toc_empty"></span><a href="https://msdn.microsoft.com/en-us/library/windows/desktop/gg153550%28v=vs.85%29.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="Mouse Movement">Mouse Movement</a>            </div>
+            <div style="padding-left: 26px;" class="toclevel2" data-toclevel="2">
+<span class="toc_empty"></span><a href="https://msdn.microsoft.com/en-us/library/windows/desktop/gg153551%28v=vs.85%29.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="Miscellaneous Mouse Operations">Miscellaneous Mouse Operations</a>            </div>
+            <div style="padding-left: 26px;" class="toclevel2" data-toclevel="2">
+<span class="toc_empty"></span><a href="https://msdn.microsoft.com/en-us/library/windows/desktop/gg153546%28v=vs.85%29.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="Keyboard Input">Keyboard Input</a>            </div>
+            <div style="padding-left: 26px;" class="toclevel2" data-toclevel="2">
+<span class="toc_empty"></span><a href="https://msdn.microsoft.com/en-us/library/windows/desktop/gg153544%28v=vs.85%29.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="Accelerator Tables">Accelerator Tables</a>            </div>
+            <div style="padding-left: 26px;" class="toclevel2" data-toclevel="2">
+<span class="toc_empty"></span><a href="https://msdn.microsoft.com/en-us/library/windows/desktop/gg153552%28v=vs.85%29.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="Setting the Cursor Image">Setting the Cursor Image</a>            </div>
+            <div style="padding-left: 26px;" class="toclevel2" data-toclevel="2">
+<span class="toc_empty"></span><a href="https://msdn.microsoft.com/en-us/library/windows/desktop/gg153554%28v=vs.85%29.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="User Input: Extended Example">User Input: Extended Example</a>            </div>
+</div>
+        
+
+        
+
+        
+        
+        <div id="toc-resizable-ew" class="toc-resizable-ew"></div>
+        
+
+<a style="left: 280px; display: inline-block;" id="NavigationResize" href="javascript:void(0)">
+    <img style="" class="cl_nav_resize_open" src="Responding%20to%20Mouse%20Clicks%20%28Windows%29_files/ImageSprite.png" title="Expand" alt="Expand">
+    <img style="display: none;" class="cl_nav_resize_close" src="Responding%20to%20Mouse%20Clicks%20%28Windows%29_files/ImageSprite.png" title="Minimize" alt="Minimize">
+</a>
+
+
+
+    </div>
+<div style="margin-left: 280px; width: auto;" id="content" class="content">
+
+
+
+
+
+
+
+        
+
+<div class="topic" xmlns="http://www.w3.org/1999/xhtml">
+  <h1 class="title">Responding to Mouse Clicks</h1>
+  
+  <div id="mainSection">
+<div class="clsServerSDKContent">
+
+</div>
+<p>If the user clicks a mouse button while the cursor is over the client
+ area of a window, the window receives one of the following messages. </p>
+<table>
+<tbody><tr><th>Message</th><th>Meaning</th></tr>
+<tr><td>
+<a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms645607%28v=vs.85%29.aspx"><strong xmlns="http://www.w3.org/1999/xhtml">WM_LBUTTONDOWN</strong></a>
+</td><td>Left button down</td></tr>
+<tr><td>
+<a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms645608%28v=vs.85%29.aspx"><strong xmlns="http://www.w3.org/1999/xhtml">WM_LBUTTONUP</strong></a>
+</td><td>Left button up</td></tr>
+<tr><td>
+<a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms645610%28v=vs.85%29.aspx"><strong xmlns="http://www.w3.org/1999/xhtml">WM_MBUTTONDOWN</strong></a>
+</td><td>Middle button down</td></tr>
+<tr><td>
+<a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms645611%28v=vs.85%29.aspx"><strong xmlns="http://www.w3.org/1999/xhtml">WM_MBUTTONUP</strong></a>
+</td><td>Middle button up</td></tr>
+<tr><td>
+<a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms646242%28v=vs.85%29.aspx"><strong xmlns="http://www.w3.org/1999/xhtml">WM_RBUTTONDOWN</strong></a>
+</td><td>Right button down</td></tr>
+<tr><td>
+<a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms646243%28v=vs.85%29.aspx"><strong xmlns="http://www.w3.org/1999/xhtml">WM_RBUTTONUP</strong></a>
+</td><td>Right button up</td></tr>
+<tr><td>
+<a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms646245%28v=vs.85%29.aspx"><strong xmlns="http://www.w3.org/1999/xhtml">WM_XBUTTONDOWN</strong></a>
+</td><td>XBUTTON1 or XBUTTON2 down</td></tr>
+<tr><td>
+<a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms646246%28v=vs.85%29.aspx"><strong xmlns="http://www.w3.org/1999/xhtml">WM_XBUTTONUP</strong></a>
+</td><td>XBUTTON1 or XBUTTON2 up</td></tr>
+</tbody></table>
+<p>&nbsp;</p>
+<p>Recall that the client area is the portion of the window that excludes the frame. For more information about client areas, see <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ff381403%28v=vs.85%29.aspx">What Is a Window?</a>
+</p>
+<h4><a id="mouse_coordinates"></a>Mouse Coordinates</h4>
+<p>In all of these messages, the <em>lParam</em> parameter contains the x- and y-coordinates of the mouse pointer. The lowest 16 bits of <em>lParam</em> contain the x-coordinate, and the next 16 bits contain the y-coordinate. Use the <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms632654%28v=vs.85%29.aspx"><strong xmlns="http://www.w3.org/1999/xhtml">GET_X_LPARAM</strong></a> and <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms632655%28v=vs.85%29.aspx"><strong xmlns="http://www.w3.org/1999/xhtml">GET_Y_LPARAM</strong></a> macros to unpack the coordinates from <em>lParam</em>.</p>
+
+<div id="code-snippet-1" class="codeSnippetContainer" xmlns="">
+    <div class="codeSnippetContainerTabs">
+        
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+                <a name="CodeSnippetCopyLink" style="display: none;" title="Copy to clipboard." href="javascript:if%20(window.epx.codeSnippet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_412acfb9-cb8e-487c-8ff7-4b98b8cf5135');">Copy</a>
+            </div>
+        </div>
+        <div id="CodeSnippetContainerCode_412acfb9-cb8e-487c-8ff7-4b98b8cf5135" class="codeSnippetContainerCode" dir="ltr">
+            <div style="color:Black;"><pre>
+int xPos = GET_X_LPARAM(lParam); 
+int yPos = GET_Y_LPARAM(lParam);
+
+
+</pre></div>
+            
+        </div>
+    </div>
+</div>
+
+<p>These macros are defined in the header file WindowsX.h.</p>
+<p>On 64-bit Windows, <em>lParam</em> is 64-bit value. The upper 32 bits of <em>lParam</em> are not used. The MSDN documentation mentions the "low-order word" and "high-order word" of <em>lParam</em>.
+ In the 64-bit case, this means the low- and high-order words of the 
+lower 32 bits. The macros extract the right values, so if you use them, 
+you will be safe.</p>
+<p>Mouse coordinates are given in pixels, not device-independent pixels 
+(DIPs), and are measured relative to the client area of the window. 
+Coordinates are signed values. Positions above and to the left of the 
+client area have negative coordinates, which is important if you track 
+the mouse position outside the window. We will  see how to do that in a 
+later topic,  <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/gg153550%28v=vs.85%29.aspx">Capturing Mouse Movement Outside the Window</a>.</p>
+<h4><a id="additional_flags"></a>Additional Flags</h4>
+<p>The <em>wParam</em> parameter contains a bitwise <strong>OR</strong> of flags, indicating the state of the other mouse buttons plus the SHIFT and CTRL keys.</p>
+<table>
+<tbody><tr><th>Flag</th><th>Meaning</th></tr>
+<tr><td>MK_CONTROL</td><td>The CTRL key is down.</td></tr>
+<tr><td>MK_LBUTTON</td><td>The left mouse button is down.</td></tr>
+<tr><td>MK_MBUTTON</td><td>The middle mouse button is down.</td></tr>
+<tr><td>MK_RBUTTON</td><td>The right mouse button is down.</td></tr>
+<tr><td> MK_SHIFT</td><td>The SHIFT key is down.</td></tr>
+<tr><td> MK_XBUTTON1</td><td>The XBUTTON1 button is down.</td></tr>
+<tr><td> MK_XBUTTON2</td><td>The XBUTTON2  button is down.</td></tr>
+</tbody></table>
+<p>&nbsp;</p>
+<p>The absence of a flag means the corresponding button or key was not pressed. For example, to test whether the CTRL key is down:</p>
+
+<div id="code-snippet-2" class="codeSnippetContainer" xmlns="">
+    <div class="codeSnippetContainerTabs">
+        
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+                <a name="CodeSnippetCopyLink" style="display: none;" title="Copy to clipboard." href="javascript:if%20(window.epx.codeSnippet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_b77e284e-689d-474d-b404-1da85060ec47');">Copy</a>
+            </div>
+        </div>
+        <div id="CodeSnippetContainerCode_b77e284e-689d-474d-b404-1da85060ec47" class="codeSnippetContainerCode" dir="ltr">
+            <div style="color:Black;"><pre>if (wParam &amp; MK_CONTROL) { ...
+</pre></div>
+            
+        </div>
+    </div>
+</div>
+
+<p>If you need to find the state of other keys besides CTRL and SHIFT, use the <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms646301%28v=vs.85%29.aspx"><strong xmlns="http://www.w3.org/1999/xhtml">GetKeyState</strong></a> function, which is described in <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/gg153546%28v=vs.85%29.aspx">Keyboard Input</a>. </p>
+<p> The <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms646245%28v=vs.85%29.aspx"><strong xmlns="http://www.w3.org/1999/xhtml">WM_XBUTTONDOWN</strong></a> and <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms646246%28v=vs.85%29.aspx"><strong xmlns="http://www.w3.org/1999/xhtml">WM_XBUTTONUP</strong></a> window messages apply to both XBUTTON1 and XBUTTON2. The <em>wParam</em> parameter indicates which button was clicked.</p>
+
+<div id="code-snippet-3" class="codeSnippetContainer" xmlns="">
+    <div class="codeSnippetContainerTabs">
+        
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+                <a name="CodeSnippetCopyLink" style="display: none;" title="Copy to clipboard." href="javascript:if%20(window.epx.codeSnippet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_96368290-b54c-425a-b20a-81453cf3e5ec');">Copy</a>
+            </div>
+        </div>
+        <div id="CodeSnippetContainerCode_96368290-b54c-425a-b20a-81453cf3e5ec" class="codeSnippetContainerCode" dir="ltr">
+            <div style="color:Black;"><pre>
+UINT button = GET_XBUTTON_WPARAM(wParam);  
+if (button == XBUTTON1)
+{
+    // XBUTTON1 was clicked.
+}
+else if (button == XBUTTON2)
+{
+    // XBUTTON2 was clicked.
+}
+
+
+</pre></div>
+            
+        </div>
+    </div>
+</div>
+
+<h3><a id="double_clicks"></a>Double Clicks</h3>
+<p>A window does not receive double-click notifications by default. To receive double clicks, set the CS_DBLCLKS flag in the <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms633576%28v=vs.85%29.aspx"><strong xmlns="http://www.w3.org/1999/xhtml">WNDCLASS</strong></a> structure when you register the window class.</p>
+
+<div id="code-snippet-4" class="codeSnippetContainer" xmlns="">
+    <div class="codeSnippetContainerTabs">
+        
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+                <a name="CodeSnippetCopyLink" style="display: none;" title="Copy to clipboard." href="javascript:if%20(window.epx.codeSnippet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_250e0dc2-1781-4595-aa24-24d7f7d21efa');">Copy</a>
+            </div>
+        </div>
+        <div id="CodeSnippetContainerCode_250e0dc2-1781-4595-aa24-24d7f7d21efa" class="codeSnippetContainerCode" dir="ltr">
+            <div style="color:Black;"><pre>
+    WNDCLASS wc = { };
+    wc.style = CS_DBLCLKS;
+
+    /* Set other structure members. */
+
+    RegisterClass(&amp;wc);
+
+
+
+</pre></div>
+            
+        </div>
+    </div>
+</div>
+
+<p>If you set the CS_DBLCLKS flag as shown, the window will receive 
+double-click notifications. A double click is indicated by a window 
+message with "DBLCLK" in the name. For example, a double click  on the 
+left mouse button produces the following sequence of messages:</p>
+<dl>
+<dd>
+<a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms645607%28v=vs.85%29.aspx"><strong xmlns="http://www.w3.org/1999/xhtml">WM_LBUTTONDOWN</strong></a>
+</dd>
+<dd>
+<a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms645608%28v=vs.85%29.aspx"><strong xmlns="http://www.w3.org/1999/xhtml">WM_LBUTTONUP</strong></a>
+</dd>
+<dd>
+<a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms645606%28v=vs.85%29.aspx"><strong xmlns="http://www.w3.org/1999/xhtml">WM_LBUTTONDBLCLK</strong></a>
+</dd>
+<dd>
+<a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms645608%28v=vs.85%29.aspx"><strong xmlns="http://www.w3.org/1999/xhtml">WM_LBUTTONUP</strong></a>
+</dd>
+</dl>
+<p>In effect, the second <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms645607%28v=vs.85%29.aspx"><strong xmlns="http://www.w3.org/1999/xhtml">WM_LBUTTONDOWN</strong></a> message that would normally be generated becomes a <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms645606%28v=vs.85%29.aspx"><strong xmlns="http://www.w3.org/1999/xhtml">WM_LBUTTONDBLCLK</strong></a> message. Equivalent messages are defined for right, middle, and XBUTTON buttons.</p>
+<p>Until you get the double-click message, there is no way to tell that 
+the first mouse click is the start of a double click. Therefore, a 
+double-click action should continue an action that begins with the first
+ mouse click. For example, in the Windows Shell, a single click selects a
+ folder, while a double click opens the folder.</p>
+<h3><a id="non-client_mouse_messages"></a>Non-client Mouse Messages</h3>
+<p>A separate set of messages are defined for mouse events that occur 
+within the non-client area of the window. These messages have the 
+letters "NC" in the name. For example, <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms645620%28v=vs.85%29.aspx"><strong xmlns="http://www.w3.org/1999/xhtml">WM_NCLBUTTONDOWN</strong></a> is the non-client equivalent of <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms645607%28v=vs.85%29.aspx"><strong xmlns="http://www.w3.org/1999/xhtml">WM_LBUTTONDOWN</strong></a>. A typical application will not intercept these messages, because the <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms633572%28v=vs.85%29.aspx"><strong xmlns="http://www.w3.org/1999/xhtml">DefWindowProc</strong></a>
+ function handles these messages correctly. However, they can be useful 
+for certain advanced functions. For example, you could use these 
+messages to implement custom behavior in the title bar. If you do handle
+ these messages, you should generally pass them to <strong>DefWindowProc</strong> afterward. Otherwise, your application will break standard functionality such as dragging or minimizing the window.</p>
+<h3><a id="next"></a>Next</h3>
+<p>
+<a href="https://msdn.microsoft.com/en-us/library/windows/desktop/gg153550%28v=vs.85%29.aspx">Mouse Movement</a>
+</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><a href="mailto:wsddocfb@microsoft.com?subject=Documentation%20feedback%20[LearnWin32%5Clearnwin32]:%20Responding%20to%20Mouse%20Clicks%20%20RELEASE:%20%2810/5/2010%29&amp;body=%0A%0APRIVACY%20STATEMENT%0A%0AThe%20SDK%20team%20uses%20the%20feedback%20submitted%20to%20improve%20the%20SDK%20documentation.%20We%20do%20not%20use%20your%20email%20address%20for%20any%20other%20purpose.%20We%20will%20remove%20your%20email%20address%20from%20our%20system%20after%20the%20issue%20you%20are%20reporting%20has%20been%20resolved.%20While%20we%20are%20working%20to%20resolve%20this%20issue,%20we%20may%20send%20you%20an%20email%20message%20to%20request%20more%20information%20about%20your%20feedback.%20After%20the%20issues%20have%20been%20addressed,%20we%20may%20send%20you%20an%20email%20message%20to%20let%20you%20know%20that%20your%20feedback%20has%20been%20addressed.%0A%0AFor%20more%20information%20about%20Microsoft%27s%20privacy%20policy,%20see%20http://privacy.microsoft.com/en-us/default.aspx." title="Send comments about this topic to Microsoft">Send comments about this topic to Microsoft</a></p>
+<p>Build date: 10/5/2010</p>
+</div>
+</div>
+
+
+    
+
+
+
+<script id="CommentTemplate" type="text/x-jquery-tmpl">
+    <div class="communityContentAnnotation">
+        <a name="${Index}"></a>
+        <h3>
+            ${Title}
+        </h3>
+        <div class="communityContentAnnotationBody">
+            {{html Body}}
+        </div>
+        <div class="communityContentAnnotationInfo">
+            <div class="communityContentAnnotationAvatarContainer">
+                <a href="${UserAvatar.Href}" title="${UserAvatar.ToolTip}" class="communityContentAnnotationAvatar"><img src="${UserAvatar.ImageUrl}" alt="${UserAvatar.ImageAltText}" width="34" height="34" /></a>
+            </div>
+            <div class="communityContentAnnotationUserDateContainer">
+                <div class="communityContentAnnotationUserContainer">
+                    <a href="${UserAvatar.Href}">
+                        ${User}
+                    </a>
+                </div>
+                <div class="communityContentAnnotationDateContainer">
+                    <span>${Date}</span>
+                    
+                    {{if EditLink}}
+                        <span>
+                            <a href="${EditLink.Href}" title="${EditLink.ToolTip}" class="communityContentCommentEditLink">${EditLink.Title}</a>
+                        </span>
+                    {{/if}}
+
+                    {{if DeleteLink}}
+                        <span>
+                            <a href="${DeleteLink.Href}" title="${DeleteLink.ToolTip}" class="communityContentDeleteLink">${DeleteLink.Title}</a>
+                        </span>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<div class="communityContentContainer">
+    <div id="CommunityContentHeader" class="communityContentHeader">
+        <div class="communityContentHeaderTitleContainer">
+            <h2>Community Additions</h2>
+                <a class="communityContentAddLink" href="https://msdn.microsoft.com/en-us/library/windows/desktop/community/add/gg153548%28v=vs.85%29.aspx">
+                    <span class="communityContentAddButton" title="Add">
+                        ADD
+                    </span>
+                </a>
+        </div>
+        <div style="clear: both;"></div>
+    </div>
+    
+    <div id="CommunityComments" data-url="/en-us/library/windows/desktop/community/comments/gg153548(v=vs.85).aspx"></div>
+</div>
+
+
+
+
+<div class="libraryMemberFilter">
+    <div class="filterContainer">
+        <span>Show:</span>
+        <label>
+            <input class="libraryFilterInherited" checked="checked" value="Inherit" type="checkbox">Inherited
+        </label>
+        <label>
+            <input class="libraryFilterProtected" checked="checked" value="Protected" type="checkbox">Protected
+        </label>
+    </div>
+</div>
+    
+<input id="libraryMemberFilterEmptyWarning" value="There are no members available with your current filter settings." type="hidden">
+
+
+ 
+</div>
+
+
+
+
+            </div>
+            <div class="clear"></div>
+
+            
+    
+<input name="__RequestVerificationToken" value="YQWsvMb6_SRWiSbJtF13FeHkMRCfLluvc893Jkl2UTrvMY911iT_m714mM7G1m98HT6UDI2837J3YIdSS-WViC4ypmw1" type="hidden">
+<input id="ratingSubmitUrl" value="https://msdn.microsoft.com/en-us/library/feedback/add/gg153548(v=vs.85).aspx" type="hidden">
+<input id="isTopicRated" value="false" type="hidden">
+
+
+
+
+    
+
+
+    <div id="ux-footer" class="ltr">
+        
+            <div id="footerSock">
+                <div id="footerSockInner">
+                    <a name="feedback"></a>
+                    <div data-fragmentname="Survey" id="Fragment_Survey" xmlns="http://www.w3.org/1999/xhtml"></div>
+
+<div class="rating">
+    <div id="ratingSection1">
+        <div class="title">
+            Was this page helpful?
+        </div>
+        <div class="description">
+            Your feedback about this content is important.<br>Let us know what you think.
+        </div>
+        <div class="buttons">
+            <button class="button" id="ratingYes">Yes</button>
+            <button class="button" id="ratingNo">No</button>
+        </div>
+        <input id="ratingValue" value="" type="hidden">
+    </div>
+    <div id="ratingSection2">
+        <div class="title">
+            Additional feedback?
+        </div>
+        <textarea id="ratingText" rows="6" cols="" maxlength="1500"></textarea>
+        <div class="counter right">
+            <span id="feedbackTextCounter">1500</span> characters remaining
+        </div>
+        <div class="buttons left">
+            <button class="button" id="ratingSubmit">Submit</button>
+            <button class="button" id="ratingSkipThis">Skip this</button>
+        </div>
+    </div>
+    <div id="ratingSection3">
+        <div class="title">
+            Thank you!
+        </div>
+        <div class="description">
+            We appreciate your feedback.
+        </div>
+    </div>
+    
+    
+    <div id="contentFeedbackQAContainer" style="display: none;"></div>
+</div>
+    
+
+                    <div data-fragmentname="SockLinks" id="Fragment_SockLinks" xmlns="http://www.w3.org/1999/xhtml">
+  
+  <div class="linkList">
+    <ul class="links">
+      <li>
+        <a href="http://go.microsoft.com/fwlink/p/?LinkId=317809" id="SockLinks_726_11" xmlns="http://www.w3.org/1999/xhtml">Find us on Facebook</a>
+      </li>
+      <li>
+        <a href="http://go.microsoft.com/fwlink/p/?LinkId=317811" id="SockLinks_726_12" xmlns="http://www.w3.org/1999/xhtml">Follow us on Twitter</a>
+      </li>
+      <li>
+        <a href="http://go.microsoft.com/fwlink/p/?linkid=393788" id="SockLinks_726_42" xmlns="http://www.w3.org/1999/xhtml">Read the blog</a>
+      </li>
+    </ul>
+  </div>
+</div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        <div id="footerContainer">
+            <div id="fourColumnFooter">
+                <div data-fragmentname="Column1" id="Fragment_Column1" xmlns="http://www.w3.org/1999/xhtml">
+  <div class="ListOfLinkLists">
+    <div class="listItems">
+      
+      <div class="linkList" xmlns="http://www.w3.org/1999/xhtml">
+        <div class="linkListTitle">Centers</div>
+        <ul class="links">
+          <li>
+            <a href="https://dev.windows.com/" id="Column1_726_13" xmlns="http://www.w3.org/1999/xhtml">Windows Dev Center</a>
+          </li>
+          <li>
+            <a href="https://msdn.microsoft.com/windows/desktop" id="Column1_726_16" xmlns="http://www.w3.org/1999/xhtml">Desktop</a>
+          </li>
+          <li>
+            <a href="https://msdn.microsoft.com/windows/hardware" id="Column1_726_17" xmlns="http://www.w3.org/1999/xhtml">Hardware</a>
+          </li>
+          <li>
+            <a href="https://msdn.microsoft.com/ie" id="Column1_726_15" xmlns="http://www.w3.org/1999/xhtml">Internet Explorer</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>              
+                <div data-fragmentname="Column2" id="Fragment_Column2" xmlns="http://www.w3.org/1999/xhtml">
+  <div class="ListOfLinkLists">
+    <div class="listItems">
+      
+      <div class="linkList" xmlns="http://www.w3.org/1999/xhtml">
+        <div class="linkListTitle">Related developer sites</div>
+        <ul class="links">
+          <li>
+            <a href="http://go.microsoft.com/fwlink/p/?linkid=285622" id="Column2_726_18" xmlns="http://www.w3.org/1999/xhtml">Microsoft Connect</a>
+          </li>
+          <li>
+            <a href="http://go.microsoft.com/fwlink/p/?linkid=285623" id="Column2_726_19" xmlns="http://www.w3.org/1999/xhtml">.NET Framework</a>
+          </li>
+          <li>
+            <a href="http://go.microsoft.com/fwlink/p/?linkid=282089" id="Column2_726_20" xmlns="http://www.w3.org/1999/xhtml">Visual Studio</a>
+          </li>
+          <li>
+            <a href="http://go.microsoft.com/fwlink/p/?linkid=282087" id="Column2_726_22" xmlns="http://www.w3.org/1999/xhtml">Windows Server</a>
+          </li>
+        </ul>
+      </div>
+      
+      <div class="linkList" xmlns="http://www.w3.org/1999/xhtml">
+        <div class="linkListTitle">Other Windows sites</div>
+        <ul class="links">
+          <li>
+            <a href="http://go.microsoft.com/fwlink/p/?linkid=280294" id="Column2_726_23" xmlns="http://www.w3.org/1999/xhtml">Enterprise</a>
+          </li>
+          <li>
+            <a href="http://go.microsoft.com/fwlink/p/?linkid=280295" id="Column2_726_24" xmlns="http://www.w3.org/1999/xhtml">Small business</a>
+          </li>
+          <li>
+            <a href="http://go.microsoft.com/fwlink/p/?linkid=280296" id="Column2_726_25" xmlns="http://www.w3.org/1999/xhtml">Students</a>
+          </li>
+          <li>
+            <a href="http://go.microsoft.com/fwlink/p/?linkid=280297" id="Column2_726_26" xmlns="http://www.w3.org/1999/xhtml">Home users</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>              
+                <div data-fragmentname="Column3" id="Fragment_Column3" xmlns="http://www.w3.org/1999/xhtml">
+  <div class="ListOfLinkLists">
+    <div class="listItems">
+      
+      <div class="linkList" xmlns="http://www.w3.org/1999/xhtml">
+        <div class="linkListTitle">Downloads</div>
+        <ul class="links">
+          <li>
+            <a href="http://go.microsoft.com/fwlink/p/?linkid=267554" id="Column3_726_27" xmlns="http://www.w3.org/1999/xhtml">Windows 8.1</a>
+          </li>
+          <li>
+            <a href="http://go.microsoft.com/fwlink/p/?linkid=328183" id="Column3_726_28" xmlns="http://www.w3.org/1999/xhtml">Windows SDK</a>
+          </li>
+          <li>
+            <a href="http://go.microsoft.com/fwlink/p/?linkid=316619" id="Column3_726_29" xmlns="http://www.w3.org/1999/xhtml">Visual Studio Express 2013</a>
+          </li>
+          <li>
+            <a href="http://go.microsoft.com/fwlink/p/?linkid=285626" id="Column3_726_30" xmlns="http://www.w3.org/1999/xhtml">More downloads</a>
+          </li>
+        </ul>
+      </div>
+      
+      <div class="linkList" xmlns="http://www.w3.org/1999/xhtml">
+        <div class="linkListTitle">Support</div>
+        <ul class="links">
+          <li>
+            <a href="http://go.microsoft.com/fwlink/p/?linkid=285632" id="Column3_726_43" xmlns="http://www.w3.org/1999/xhtml">Forums</a>
+          </li>
+          <li>
+            <a href="http://go.microsoft.com/fwlink/p/?linkid=285633" id="Column3_726_44" xmlns="http://www.w3.org/1999/xhtml">More support options</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>              
+                <div data-fragmentname="Column4" id="Fragment_Column4" xmlns="http://www.w3.org/1999/xhtml">
+  <div class="ListOfLinkLists">
+    <div class="listItems">
+      
+      <div class="linkList" xmlns="http://www.w3.org/1999/xhtml">
+        <div class="linkListTitle">Essentials</div>
+        <ul class="links">
+          <li>
+            <a href="http://go.microsoft.com/fwlink/p/?linkid=285627" id="Column4_726_35" xmlns="http://www.w3.org/1999/xhtml">Windows APIs</a>
+          </li>
+          <li>
+            <a href="http://go.microsoft.com/fwlink/p/?linkid=285628" id="Column4_726_36" xmlns="http://www.w3.org/1999/xhtml">Samples</a>
+          </li>
+          <li>
+            <a href="http://go.microsoft.com/fwlink/p/?linkid=285629" id="Column4_726_37" xmlns="http://www.w3.org/1999/xhtml">Compatibility and certification</a>
+          </li>
+          <li>
+            <a href="http://go.microsoft.com/fwlink/p/?linkid=285630" id="Column4_726_45" xmlns="http://www.w3.org/1999/xhtml">Desktop dashboard</a>
+          </li>
+        </ul>
+      </div>
+      
+      <div class="linkList" xmlns="http://www.w3.org/1999/xhtml">
+        <div class="linkListTitle">Stay connected</div>
+        <ul class="links">
+          <li>
+            <a href="http://go.microsoft.com/fwlink/p/?linkid=285954" id="Column4_726_41" xmlns="http://www.w3.org/1999/xhtml">Microsoft events</a>
+          </li>
+          <li>
+            <a href="http://go.microsoft.com/fwlink/p/?linkid=313895" id="Column4_726_39" xmlns="http://www.w3.org/1999/xhtml">Building Apps for Windows Devices</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>              
+            </div>
+
+            <div id="baseFooterLogos">
+                <span class="microsoftlogo" title="Microsoft"></span>
+                <a href="https://msdn.microsoft.com/en-us" class="msdnlogo" title="MSDN"></a>
+            </div>
+        
+            <div id="baseFooter">
+                <div id="FooterCopyright">© 2015 Microsoft</div>
+                <div data-fragmentname="BaseFooter" id="Fragment_BaseFooter" xmlns="http://www.w3.org/1999/xhtml">
+  
+  <div class="linkList">
+    <ul class="links horizontal">
+      <li>
+        <a href="http://go.microsoft.com/fwlink/?LinkId=248681" id="BaseFooter_35351_3" xmlns="http://www.w3.org/1999/xhtml">Privacy and Cookies</a>
+      </li>
+      <li>
+        <a href="http://go.microsoft.com/fwlink/p/?linkid=248155" id="BaseFooter_35351_1" xmlns="http://www.w3.org/1999/xhtml">Terms of Use</a>
+      </li>
+      <li>
+        <a href="http://go.microsoft.com/fwlink/p/?linkid=248154" id="BaseFooter_35351_2" xmlns="http://www.w3.org/1999/xhtml">Trademarks</a>
+      </li>
+      <li>
+        <a href="http://go.microsoft.com/fwlink/p/?LinkId=400453" id="BaseFooter_730_5" xmlns="http://www.w3.org/1999/xhtml">Site map</a>
+      </li>
+    </ul>
+  </div>
+</div>  
+                <div data-fragmentname="HelloText" id="Fragment_HelloText" xmlns="http://www.w3.org/1999/xhtml">Hello from Seattle.
+</div>  
+                        
+    
+    <span id="selectLocaleFromPopUp">
+        <div class="locale-selector" style="position: relative">
+            <a class="current-locale" href="javascript:void(0)">
+                <span class="text">English</span>
+                <span class="gear"></span>
+            </a>
+            <div class="locale-selection-panel site-flag site-flag-lang" style="top: -245px; display: none;">
+                <div class="content">
+                    <table class="all-locales" autogeneratecolumns="false" allowpaging="false" allowsorting="false" style="border-collapse: collapse;" cellspacing="0">
+                        <tbody>
+                            <tr>
+
+
+                                    <td><a title="Deutsch" href="https://msdn.microsoft.com/?action=SelectLocale&amp;currentLocale=en-us&amp;newLocale=de-de&amp;fromPage=/en-us/library/windows/desktop/gg153548%28v=vs.85%29.aspx/" class="locale-link">Deutsch</a></td>
+                                    <td><a title="English" href="https://msdn.microsoft.com/?action=SelectLocale&amp;currentLocale=en-us&amp;newLocale=en-us&amp;fromPage=/en-us/library/windows/desktop/gg153548%28v=vs.85%29.aspx/" class="locale-link selected">English</a></td>
+                                    <td><a title="Español" href="https://msdn.microsoft.com/?action=SelectLocale&amp;currentLocale=en-us&amp;newLocale=es-es&amp;fromPage=/en-us/library/windows/desktop/gg153548%28v=vs.85%29.aspx/" class="locale-link">Español</a></td>
+                                    <td><a title="Français" href="https://msdn.microsoft.com/?action=SelectLocale&amp;currentLocale=en-us&amp;newLocale=fr-fr&amp;fromPage=/en-us/library/windows/desktop/gg153548%28v=vs.85%29.aspx/" class="locale-link">Français</a></td>
+                                        </tr><tr>
+                                    <td><a title="Italiano" href="https://msdn.microsoft.com/?action=SelectLocale&amp;currentLocale=en-us&amp;newLocale=it-it&amp;fromPage=/en-us/library/windows/desktop/gg153548%28v=vs.85%29.aspx/" class="locale-link">Italiano</a></td>
+                                    <td><a title="日本語" href="https://msdn.microsoft.com/?action=SelectLocale&amp;currentLocale=en-us&amp;newLocale=ja-jp&amp;fromPage=/en-us/library/windows/desktop/gg153548%28v=vs.85%29.aspx/" class="locale-link">日本語</a></td>
+                                    <td><a title="한국어" href="https://msdn.microsoft.com/?action=SelectLocale&amp;currentLocale=en-us&amp;newLocale=ko-kr&amp;fromPage=/en-us/library/windows/desktop/gg153548%28v=vs.85%29.aspx/" class="locale-link">한국어</a></td>
+                                    <td><a title="Português" href="https://msdn.microsoft.com/?action=SelectLocale&amp;currentLocale=en-us&amp;newLocale=pt-br&amp;fromPage=/en-us/library/windows/desktop/gg153548%28v=vs.85%29.aspx/" class="locale-link">Português</a></td>
+                                        </tr><tr class="last">
+                                    <td><a title="Pусский" href="https://msdn.microsoft.com/?action=SelectLocale&amp;currentLocale=en-us&amp;newLocale=ru-ru&amp;fromPage=/en-us/library/windows/desktop/gg153548%28v=vs.85%29.aspx/" class="locale-link">Pусский</a></td>
+                                    <td><a title="简体中文" href="https://msdn.microsoft.com/?action=SelectLocale&amp;currentLocale=en-us&amp;newLocale=zh-cn&amp;fromPage=/en-us/library/windows/desktop/gg153548%28v=vs.85%29.aspx/" class="locale-link">简体中文</a></td>
+                                    <td><a title="繁體中文" href="https://msdn.microsoft.com/?action=SelectLocale&amp;currentLocale=en-us&amp;newLocale=zh-tw&amp;fromPage=/en-us/library/windows/desktop/gg153548%28v=vs.85%29.aspx/" class="locale-link">繁體中文</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="arrow">
+                        &nbsp;</div>
+                </div>
+            </div>
+        </div>
+    </span>
+
+  
+                <link type="text/css" rel="stylesheet">
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div> 
+
+
+            <div class="footerPrintView">
+                <div class="footerCopyrightPrintView">© 2015 Microsoft</div>
+            </div>
+
+            
+            
+    
+
+
+
+            <input id="MtpsDevice" value="Default" type="hidden">
+
+
+<!--[CDATA[ Third party scripts and code linked to or referenced from this website are licensed to you by the parties that own such code, not by Microsoft.  See ASP.NET Ajax CDN Terms of Use – http://www.asp.net/ajaxlibrary/CDN.ashx. ]]-->
+
+            
+            
+            
+            
+            
+
+
+
+
+
+
+
+<noscript><div><img alt="DCSIMG" id="Img1" width="1" height="1" src="https://m.webtrends.com/dcsmgru7m99k7mqmgrhudo0k8_8c6m/njs.gif?dcsuri=/nojavascript&amp;WT.js=No" /></div></noscript>
+
+
+
+
+
+
+
+
+
+<noscript>
+  <a href="http://www.omniture.com" title="Web Analytics">
+    <img src="//msstonojsmsdn.112.2o7.net/b/ss/msstonojsmsdn/1/H.20.2--NS/0" height="1" width="1" border="0" alt="" />
+  </a>
+</noscript>
+
+
+
+
+<div id="globalRequestVerification">
+    <input name="__RequestVerificationToken" value="PiKjKoljWVain1XNFshPHn6XvVzS5cxDAOvIR5xlNnp-uz4WFdp8FYUAR9BYk6csI65R99Q4JeVDTwkWri0ZQvXRs3Q1" type="hidden">
+</div>
+
+
+        </div>
+
+        
+        
+        
+        
+    <script type="text/javascript" class="mtps-injected">
+/*<![CDATA[*/
+(function(window,document){"use strict";function preload(scripts){for(var result=[],script,e,i=0;i<scripts.length;i++)script=scripts[i],script.hasOwnProperty("url")&&(e=document.createElement("script"),e.src=script.url,script.throwaway=e),result.push(script);return result}function inject(scripts,index){var script,elem;if(index>=scripts.length){delete mtps.injectScripts;return}script=scripts[index];elem=document.createElement("script");elem.className="mtps-injected";elem.async=!1;var isLoaded=!1,timeoutId=0,injectNextFnName="",injectNext=elem.onerror=function(){isLoaded||(isLoaded=!0,inject(scripts,index+1),window.clearTimeout(timeoutId),elem.onload=elem.onerror=elem.onreadystatechange=null,injectNextFnName&&delete mtps[injectNextFnName],elem.removeEventListener&&elem.removeEventListener("load",injectNext,!1))};elem.addEventListener?elem.addEventListener("load",injectNext,!1):elem.readyState==="uninitialized"?elem.onreadystatechange=function(){(this.readyState==="loaded"||this.readyState==="complete")&&injectNext()}:elem.onload=injectNext;script.hasOwnProperty("url")?(timeoutId=window.setTimeout(injectNext,12e4),elem.src=script.url):(injectNextFnName="_injectNextScript_"+index,mtps[injectNextFnName]=injectNext,timeoutId=window.setTimeout(injectNext,2e3),elem.text="try {\n"+script.txt+"\n} finally { MTPS."+injectNextFnName+" && MTPS."+injectNextFnName+"(); }");parent.appendChild(elem)}var mtps=window.MTPS||(window.MTPS={}),parent=document.getElementsByTagName("head")[0];mtps.injectScripts=function(scripts){inject(preload(scripts),0)}})(window,document);
+MTPS.injectScripts([
+	{ txt: "/**/\r\n(window.MTPS || (window.MTPS = {})).cdnDomains || (window.MTPS.cdnDomains = { \r\n\t\"image\": \"https://i-msdn.sec.s-msft.com\", \r\n\t\"js\": \"https://i2-msdn.sec.s-msft.com\", \r\n\t\"css\": \"https://i-msdn.sec.s-msft.com\", \r\n\t\"xap\": \"https://msdn.microsoft.com\"\r\n});\r\n/**/" },
+	{ url: "https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js" },
+	{ txt: "//\n  var literalNormalizedUrl = \u0027/en-us/library/windows/desktop/gg153548(l=en-us,v=vs.85).aspx\u0027;\n  var wt_nvr_ru = \u0027WT_NVR_RU\u0027;\n  var wt_fpcdom = \u0027.microsoft.com\u0027;\n  var wt_domlist = \u0027msdn.microsoft.com\u0027;\n  var wt_pathlist = \u0027\u0027;\n  var wt_paramlist = \u0027DCSext.mtps_devcenter\u0027;\n  var wt_siteid = \u0027MSDN\u0027;\n  var gDomain = \u0027m.webtrends.com\u0027;\n  var gDcsId = \u0027dcsmgru7m99k7mqmgrhudo0k8_8c6m\u0027;\n  var gFpc = \u0027WT_FPC\u0027;\n\n\n\n  if (document.cookie.indexOf(gFpc + \"=\") == -1) {\n    var wtidJs = document.createElement(\"script\");\n    wtidJs.src = \"//\" + gDomain + \"/\" + gDcsId + \"/wtid.js\";\n    document.getElementsByTagName(\"head\")[0].appendChild(wtidJs);\n  }\n\n\n\n  var detectedLocale = \u0027en-us\u0027;\n  var wtsp = \u0027_msdn_\u0027;\n  var gTrackEvents = \u00270\u0027;\n/**/" },
+	{ txt: "/**/\n  var omni_guid = \"e9e0b8a1-ff18-40d0-b376-54ee5e39538c\";\n/**/" },
+	{ txt: "//\n\n            window.appInsightsId = \u002760854590-027a-4ae4-98be-2741a40f355f\u0027;\n            //" },
+	{ url: "https://i2-msdn.sec.s-msft.com/Combined.js?resources=0:Utilities,1:Rating,0:Topic,2:webtrendsscript,3:omni_rsid_MSDN,0:AppInsightsPerf,4:Toc,1:SearchBox;/Areas/Epx/Content/Scripts:0,/Areas/Epx/Themes/Base/Content:1,/Areas/Global/Content/Webtrends/resources:2,/Areas/Global/Content/Omniture/resources/MSDN:3,/Areas/Library/Content:4\u0026amp;hashKey=42D00AB936524A0898C75C490CB4E093\u0026amp;v=86D29845FF68FE8576CA5DDA8A890E6C" },
+	{ url: "https://i1.services.social.microsoft.com/search/Widgets/SearchBox.jss?boxid=HeaderSearchTextBox\u0026btnid=HeaderSearchButton\u0026brand=MSDN\u0026loc=en-us\u0026Refinement=181\u0026focusOnInit=false\u0026iroot=windows%2fdesktop\u0026emptyWatermark=true\u0026searchButtonTooltip=Search" },
+	{ url: "https://i2-msdn.sec.s-msft.com/Combined.js?resources=0:TocDropDown,1:NavigationResize;/Areas/Epx/Themes/Windows/Content:0,/Areas/Library/Content:1\u0026amp;hashKey=D158B2010A6B5AB806BFFA399599FB66\u0026amp;v=86D29845FF68FE8576CA5DDA8A890E6C" },
+	{ url: "https://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js" },
+	{ url: "https://i2-msdn.sec.s-msft.com/Combined.js?resources=0:CommunityContent,0:LibraryMemberFilter,1:Toc_Fixed,2:SelectLocaleFromPopUp,1:CodeSnippet,1:TopicNotInScope,1:CollapsibleArea,1:VersionSelector,1:SurveyBroker;/Areas/Library/Content:0,/Areas/Epx/Content/Scripts:1,/Areas/Epx/Themes/Base/Content:2\u0026amp;hashKey=7806B2478E0DC4023BB82CB6D0A73A70\u0026amp;v=86D29845FF68FE8576CA5DDA8A890E6C" },
+	{ txt: "$(document).ready(function() {\n        try {\n            var token = $(\"#globalRequestVerification input[name=\u0027__RequestVerificationToken\u0027]\").clone();\n            $(\"#siteFeedbackForm\").append(token);\n        } catch(err) {\n            \n        }\n    });" }
+]);
+
+/*]]>*/
+</script>
+<script src="Responding%20to%20Mouse%20Clicks%20%28Windows%29_files/broker-config.js"></script></body></html>
