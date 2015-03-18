@@ -30,6 +30,7 @@ class Circle : public Shape
 		///////////////////////////////////////////////////////////
 		void cartesian(COLORREF color,HDC hdc)
 		{
+			color = RGB(255,0,0);
 			double slope = abs(x2) / abs(y2);	
 			int x=0;
 			double y = R;
@@ -38,7 +39,7 @@ class Circle : public Shape
 			while(x<y)
 			{
 				x++;
-				y = sqrt ((R*R) - (x*x))	
+				y = sqrt ((R*R) - (x*x));	
 				draw8Points(x_s, y_s, x, y, color, hdc);
 			}	
 			
@@ -47,6 +48,7 @@ class Circle : public Shape
 		
 		void polar(COLORREF color,HDC hdc)
 		{
+			color = RGB(0,255,0);
 			int x = R, y=0;
 			draw8Points(x_s, y_s, x, y, color, hdc);
 			

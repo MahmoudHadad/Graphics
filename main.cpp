@@ -17,6 +17,7 @@ using namespace std;
 #define PolarCircle 5  
 #define Save 6 
 #define Load 7
+#define Exit 7
 void loadVector (HDC hdc, COLORREF color);
 void saveVector ();
 void drowLineMidPoint(int x1,int y1,int x2,int y2,COLORREF color,HDC hdc);
@@ -56,6 +57,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam) 
 			
 			AppendMenu(hFile, MF_STRING, Save, "Save");
 			AppendMenu(hFile, MF_STRING, Load, "Load");
+			AppendMenu(hFile, MF_STRING, Exit, "Exit");
 			
 			AppendMenu(hLine, MF_STRING, Cartesian, "Cartesian");
 			AppendMenu(hLine, MF_STRING, Parametric, "Parametric");
@@ -70,7 +72,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam) 
 		}
 		/////////////////////////
 		case WM_COMMAND:{ 
-			
+			// File
 			if(LOWORD(wParam) == Save)
 			{
 				firstClick = true;
@@ -85,6 +87,12 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam) 
 				loadVector (hdc, color);
 				ReleaseDC(hwnd,hdc);
 			}
+			else if(LOWORD(wParam) == Exit)
+			{
+				
+			}
+			//////////////////////////////////////////
+			// Line
 			else if(LOWORD(wParam) == Cartesian)
 			{
 				firstClick = true;
@@ -101,7 +109,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam) 
 				firstClick = true;
 				status = MidPoint;
 			}
-			
+			////////////////////////////////////////////
+			// Circle
 			else if(LOWORD(wParam) == CartesianCircle)
 			{
 				firstClick = true;
@@ -135,10 +144,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam) 
 		   	 
 		   	 	xPos = GET_X_LPARAM(lParam); 
 				yPos = GET_Y_LPARAM(lParam);
-	            hdc = GetDC(hwnd);
-	            
-	            Shape * s;
-	            
+	            hdc = GetDC(hwnd);            
 		   	 	
 	            // check alogorithm to be used 
 	            if(status == Cartesian)
@@ -154,13 +160,20 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam) 
 	            	drowLineMidPoint(x_1, y_1, xPos, yPos, color, hdc);
 	            }
 	            
-	            else if(status == Cartesian)
+	            else if(status == CartesianCircle)
 	            {
-	            	s = new  
-	            	s = new Circle(status, x_1, y_1, xPos, yPos) ;
-	            	s.cartesian(color, hdc);
+	            	Circle c (status, x_1, y_1, xPos, yPos) ;
+	            	c.cartesian( color, hdc);
+	            	allShapes.push_back(c);
 	            }
-	            allShapes.push_back(*s);
+	            
+	            else if(status == PolarCircle)
+	            {
+	            	Circle c (status, x_1, y_1, xPos, yPos) ;
+	            	c.polar( color, hdc);
+	            	allShapes.push_back(c);
+	            }
+	            
 	            // and so on
 	            ReleaseDC(hwnd,hdc);
 	            firstClick = true;
