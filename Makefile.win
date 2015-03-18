@@ -4,8 +4,8 @@
 CPP      = g++.exe
 CC       = gcc.exe
 WINDRES  = windres.exe
-OBJ      = main.o shape.o
-LINKOBJ  = main.o shape.o
+OBJ      = main.o shape.o circle.o
+LINKOBJ  = main.o shape.o circle.o
 LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc -mwindows -g3
 INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include"
 CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include"
@@ -30,3 +30,6 @@ main.o: main.cpp
 
 shape.o: shape.cpp
 	$(CPP) -c shape.cpp -o shape.o $(CXXFLAGS)
+
+circle.o: circle.cpp
+	$(CPP) -c circle.cpp -o circle.o $(CXXFLAGS)

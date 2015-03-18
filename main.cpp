@@ -6,13 +6,15 @@
 #include <fstream>
 #include <cmath>
 #include "shape.h"
+#include "circle.h"
+
 using namespace std;
 
 #define Cartesian 1
 #define Parametric 2
 #define MidPoint 3
-#define alg1 4  
-#define alg2 5  
+#define CartesianCircle 4  
+#define PolarCircle 5  
 #define Save 6 
 #define Load 7
 void loadVector (HDC hdc, COLORREF color);
@@ -59,8 +61,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam) 
 			AppendMenu(hLine, MF_STRING, Parametric, "Parametric");
 			AppendMenu(hLine, MF_STRING, MidPoint, "MidPoint");
 			               
-			AppendMenu(hCircle, MF_STRING, alg1, "alg1");
-			AppendMenu(hCircle, MF_STRING, alg2, "alg2");
+			AppendMenu(hCircle, MF_STRING, CartesianCircle, "CartesianCircle");
+			AppendMenu(hCircle, MF_STRING, PolarCircle, "PolarCircle");
 			                
 			
 			SetMenu(hwnd, hMenubar);
@@ -100,6 +102,19 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam) 
 				status = MidPoint;
 			}
 			
+			else if(LOWORD(wParam) == CartesianCircle)
+			{
+				firstClick = true;
+				status = CartesianCircle;
+			}
+			
+			else if(LOWORD(wParam) == PolarCircle)
+			{
+				firstClick = true;
+				status = PolarCircle;
+			}
+			
+			
 			
 			// add new actions here
 			
@@ -122,7 +137,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam) 
 				yPos = GET_Y_LPARAM(lParam);
 	            hdc = GetDC(hwnd);
 	            
-	            allShapes.push_back( *(new Shape(status, x_1, y_1, xPos, yPos) ));
+	            Shape * s;
+	            
 		   	 	
 	            // check alogorithm to be used 
 	            if(status == Cartesian)
@@ -137,6 +153,14 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam) 
 	            {
 	            	drowLineMidPoint(x_1, y_1, xPos, yPos, color, hdc);
 	            }
+	            
+	            else if(status == Cartesian)
+	            {
+	            	s = new  
+	            	s = new Circle(status, x_1, y_1, xPos, yPos) ;
+	            	s.cartesian(color, hdc);
+	            }
+	            allShapes.push_back(*s);
 	            // and so on
 	            ReleaseDC(hwnd,hdc);
 	            firstClick = true;

@@ -1,5 +1,7 @@
 #ifndef SHAPE_H
 #define SHAPE_H
+#include "math.h"
+#include <windows.h>
 
 class Shape
 {
@@ -17,7 +19,8 @@ class Shape
 		this->x2 = x2;
 		this->y2 = y2;
 		this->algorithm = algorithm;
-	}	
+	}
+		
 };
 
 #endif
