@@ -1,8 +1,11 @@
 #ifndef SHAPE_H
 #define SHAPE_H
 #include "math.h"
+#include <fstream>
 #include <windows.h>
+#include <iostream>
 
+using namespace std;
 class Shape
 {
 	public:
@@ -20,7 +23,11 @@ class Shape
 		this->y2 = y2;
 		this->algorithm = algorithm;
 	}
-		
+	
+	virtual void save(fstream &outFile)
+	{
+		outFile <<"0";
+	}	
 };
 
 #endif

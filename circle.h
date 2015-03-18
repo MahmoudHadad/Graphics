@@ -2,8 +2,9 @@
 #define CIRCLE_H
 
 #include "shape.h"
+#include <fstream>
 
-
+using namespace std;
 class Circle : public Shape
 {
 	public:
@@ -114,6 +115,15 @@ class Circle : public Shape
 				x++;
 				draw8Points(x_s, y_s, x, y, color, hdc);;
 			}
+		}
+		
+
+		
+		//////////////////////////////////////////////////
+		void save(fstream &outFile)
+		{
+			outFile <<algorithm <<" "<<x_s <<" "<< y_s <<" "<< 
+				x2 <<" "<< y2 <<endl;
 		}
 		
 };

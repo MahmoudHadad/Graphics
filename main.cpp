@@ -2,11 +2,11 @@
 #include <Windowsx.h>
 #include <algorithm>
 #include <vector>
-#include <iostream>
 #include <fstream>
 #include <cmath>
 #include "shape.h"
 #include "circle.h"
+#include "line.h"
 
 using namespace std;
 
@@ -23,17 +23,15 @@ using namespace std;
 
 void loadVector (HDC hdc, COLORREF color);
 void saveVector ();
-void drowLineMidPoint(int x1,int y1,int x2,int y2,COLORREF color,HDC hdc);
-void drowLineParametric(int x1,int y1,int x2,int y2,COLORREF color,HDC hdc);
-void drowLineCartesian (int x1,int y1,int x2,int y2,COLORREF color,HDC hdc);
-int Max(int a,int s);
+
+
 
 /* This is where all the input to the window goes to */
 int x_1 =10;
 int y_1 = 10;
 int status = Cartesian;
 bool firstClick = true;
-vector <Shape>allShapes;
+vector <Shape*>allShapes;
 
 //////////////////////////////////////////////////////////////////////////////////////
 
@@ -163,50 +161,58 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam) 
 	            hdc = GetDC(hwnd);            
 		   	 	
 	            // check alogorithm to be used 
+	            //Line
 	            if(status == Cartesian)
 	            {
-	            	drowLineCartesian(x_1, y_1, xPos, yPos, color, hdc);
+	            	Line *l = new Line(Cartesian,x_1, y_1, xPos, yPos);
+	            	l->drowLineCartesian(color, hdc);
+	            	allShapes.push_back(l);
 	            }
 	            else if(status == Parametric)
 	            {
-	            	drowLineParametric(x_1, y_1, xPos, yPos, color, hdc);
+	            	Line *l = new Line (Parametric,x_1, y_1, xPos, yPos);
+	            	l->drowLineParametric( color, hdc);
+	            	allShapes.push_back(l);
 	            }
 				else if	(status == MidPoint)
 	            {
-	            	drowLineMidPoint(x_1, y_1, xPos, yPos, color, hdc);
+	            	Line* l = new Line (MidPoint,x_1, y_1, xPos, yPos);
+	            	l->drowLineMidPoint( color, hdc);
+	            	allShapes.push_back(l);
 	            }
-	            
+	            //////////////////////////////////////////////
+	            // Circle
 	            else if(status == CartesianCircle)
 	            {
-	            	Circle c (status, x_1, y_1, xPos, yPos) ;
-	            	c.cartesian( color, hdc);
+	            	Circle* c = new Circle(status, x_1, y_1, xPos, yPos) ;
+	            	c->cartesian( color, hdc);
 	            	allShapes.push_back(c);
 	            }
 	            
 	            else if(status == PolarCircle)
 	            {
-	            	Circle c (status, x_1, y_1, xPos, yPos) ;
-	            	c.polar( color, hdc);
+	            	Circle* c = new Circle(status, x_1, y_1, xPos, yPos) ;
+	            	c->polar( color, hdc);
 	            	allShapes.push_back(c);
 	            }
 	            
 	            else if(status == MidPointBresenham)
 	            {
-	            	Circle c (status, x_1, y_1, xPos, yPos) ;
-	            	c.bresenham( color, hdc);
+	            	Circle *c  = new Circle(status, x_1, y_1, xPos, yPos) ;
+	            	c->bresenham( color, hdc);
 	            	allShapes.push_back(c);
 	            }
 	            
 	            else if(status == FastMidPointCircle)
 	            {
-	            	Circle c (status, x_1, y_1, xPos, yPos) ;
-	            	c.fastBresenham( color, hdc);
+	            	Circle* c = new Circle(status, x_1, y_1, xPos, yPos) ;
+	            	c->fastBresenham( color, hdc);
 	            	allShapes.push_back(c);
 	            }
 	            
 	            
 	            
-	            // and so on
+	          
 	            ReleaseDC(hwnd,hdc);
 	            firstClick = true;
 		   	 }
@@ -273,122 +279,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	return Msg.wParam;
 }
 
- ////////////////////////////////////////////
- int Max(int a,int s){
-    if(a>s) return a;
-    return s;
-}
 
-void drowLineCartesian (int x1,int y1,int x2,int y2,COLORREF color,HDC hdc){
-     
-     int dX = x2 - x1, dY = y2 - y1;
-     float m = (float) dY/dX;
-     
-	 if (abs (m) <1)
-     {
-     	if(x2<x1){
-	     swap(x1,x2);
-	     swap(y1,y2);
-    	}
-    	
-     	float x, y = y1; 
-     	float  c;
-     	x = x1;
-     	c = y1 - (m*x1);
-     	while (x<=x2)
-     	{
-     		y = y + (m);
-		     		
-     		SetPixel(hdc,round(x),(y),color);
-     		x++;
-     	}
-     }
-     else 
-     {
-     	if(y2<y1){
-	     swap(x1,x2);
-	     swap(y1,y2);
-    	}
-    	
-    	float  x = x1, y; 
-     	
-    	y = y1;
-    	while(y<y2)
-    	{
-    		x = x + (1/m);
-    		SetPixel(hdc, round(x),(y),color);
-    		y++;
-    	}
-    	
-     }
-}
-/////////////////
-void drowLineParametric(int x1,int y1,int x2,int y2,COLORREF color,HDC hdc){
-     if(x2<x1){
-	     swap(x1,x2);
-	     swap(y1,y2);
-     }
-     int dx=x2-x1;
-     int dy=y2-y1;
-     int  x=x1;
-     int  y=y1;
-     float ro=Max(dx,dy);
-     ro=1/ro;
-  
-     for (float i =0;i<1;i+=ro){
-         
-         x= x1 + int(i*dx);
-         y= y1 + int(i*dy);
-         
-         SetPixel(hdc,x,y,color);
-         }
-     
-}
-///////////////////////////
-void drowLineMidPoint(int x1,int y1,int x2,int y2,COLORREF color,HDC hdc){
-	
-	 if(x2<x1){
-	     swap(x1,x2);
-	     swap(y1,y2);
-     }
-	int x = x1;
-	int y = y1;
-	int dx = x2 - x1;
-	int dy = y2 - y1;
-	int d;
-	int change1, change2;
-	if(y1<=y2)
-	{
-		d= dx - (2*dy);
-		change1 = 2*(dx - dy);
-		change2 = -2 * dy;
-	}
-	else
-	{
-		d= -1*dx - (2*dy);
-		change1 = -2*(dx + dy);
-		change2 = -2 * dy;
-	}
-	SetPixel(hdc,x,y,color);
-	int updateY ;
-	if(y2>y1)
-		updateY = 1;
-	else
-		updateY = -1;	
-	while(x <= x2)
-	{
-		x = x+1;
-		if(d<0)
-		{
-			y = y + updateY;
-			d = d+change1;
-		}
-		else d = d+change2;
-		
-		SetPixel(hdc,x,y,color);
-	}
-	
-}
+
 //////////////////////////////////////////////////////////////////////////////////////  
 void saveVector ()
 {
@@ -396,8 +288,8 @@ void saveVector ()
 	
 	for(int i=0;i<allShapes.size();i++)
 	{
-		outFile <<allShapes[i].algorithm <<" "<< allShapes[i].x_s <<" "<< allShapes[i].y_s <<" "<< 
-				allShapes[i].x2 <<" "<< allShapes[i].y2 <<endl;
+		allShapes[i]->save(outFile);
+		//outFile<<"1";
 	}
 	
 	outFile.close();
@@ -407,27 +299,68 @@ void loadVector (HDC hdc, COLORREF color )
 {
 	fstream inFile("save.txt", ios::in );
 	int algorithm;
-	int x1,x2,y1,y2;
+	
 	while(inFile>>algorithm)
 	{
-		inFile>>x1>>y1>>x2>>y2;
-		allShapes.push_back( *(new Shape(algorithm, x1, y1, x2, y2) ));
-				   	 	
-	    // check alogorithm to be used 
-	    if(status == Cartesian)
+		int x1,x2,y1,y2,x3,y3;
+	   	 	
+	    //check alogorithm to be used 
+	    // line
+	    if(algorithm == Cartesian)
         {
-        	drowLineCartesian(x1, y1, x2, y2, color, hdc);
+        	inFile>>x1>>y1>>x2>>y2;
+        	Line *l = new Line(algorithm,x1, y1, x2, y2);
+        	l->drowLineCartesian(color, hdc);
+        	allShapes.push_back(l);
+        	
         }
-        else if(status == Parametric)
+        else if(algorithm == Parametric)
         {
-        	drowLineParametric(x1, y1, x2, y2, color, hdc);
+        	inFile>>x1>>y1>>x2>>y2;
+        	Line *l = new Line(algorithm,x1, y1, x2, y2);
+        	l->drowLineParametric(color, hdc);
+        	allShapes.push_back(l);
         }
-		else if	(status == MidPoint)
+		else if	(algorithm == MidPoint)
         {
-        	drowLineMidPoint(x1, y1, x2, y2, color, hdc);
+        	inFile>>x1>>y1>>x2>>y2;
+        	Line *l = new Line(algorithm,x1, y1, x2, y2);
+        	l->drowLineMidPoint(color, hdc);
+        	allShapes.push_back(l);
         }
-        // and so on
-       
+        ///////////////////////////// 
+        // circle
+        else if(algorithm == CartesianCircle)
+        {
+        	inFile>>x1>>y1>>x2>>y2;
+        	Circle* c = new Circle(algorithm,x1, y1, x2, y2);
+        	c->cartesian( color, hdc);
+        	allShapes.push_back(c);
+        }
+        
+        else if(algorithm == PolarCircle)
+        {
+        	inFile>>x1>>y1>>x2>>y2;
+        	Circle* c = new Circle(algorithm,x1, y1, x2, y2);
+        	c->polar( color, hdc);
+        	allShapes.push_back(c);
+        }
+        
+        else if(algorithm == MidPointBresenham)
+        {
+        	inFile>>x1>>y1>>x2>>y2;
+        	Circle *c  = new Circle(algorithm,x1, y1, x2, y2);
+        	c->bresenham( color, hdc);
+        	allShapes.push_back(c);
+        }
+        
+        else if(algorithm == FastMidPointCircle)
+        {
+        	inFile>>x1>>y1>>x2>>y2;
+        	Circle* c = new Circle(algorithm,x1, y1, x2, y2);
+        	c->fastBresenham( color, hdc);
+        	allShapes.push_back(c);
+        }
 
 	}
 	
