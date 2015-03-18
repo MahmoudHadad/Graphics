@@ -62,6 +62,60 @@ class Circle : public Shape
 				draw8Points(x_s, y_s, x, y, color, hdc);		
 			}
 		}
+		////////////////////////////////////////////////////////////
+		
+		void bresenham(COLORREF color,HDC hdc)
+		{
+			color = RGB(0,0,255);
+			int x = 0, y = R;
+			int d = 1-R;
+			draw8Points(x_s, y_s, x, y, color, hdc);
+			
+			while(x<y)
+			{
+				x++;
+				if(d<0)
+				{
+					d += (2 * x) + 1;
+				}
+				else 
+				{
+					d += 2*(x-y) + 3;
+					y--;
+				}
+				
+				draw8Points(x_s, y_s, x, y, color, hdc);
+			}
+		}
+		
+		//////////////////////////////////////////////////
+		
+		void fastBresenham(COLORREF color,HDC hdc)
+		{
+			color = RGB(100,100,100);
+			int x = 0, y = R;
+			int d = 1-R;
+			int c1 = 3, c2 = 5-(2*R);
+			draw8Points(x_s, y_s, x, y, color, hdc);
+			while(x<y)
+			{
+				if(d<0)
+				{
+					d+=c1;
+					c2+=2;
+				}
+				else
+				{
+					d+=c2;
+					c2+=4;
+					y--;
+				}
+				c1+=2;
+				x++;
+				draw8Points(x_s, y_s, x, y, color, hdc);;
+			}
+		}
+		
 };
 
 #endif

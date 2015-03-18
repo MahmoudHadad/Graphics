@@ -17,7 +17,10 @@ using namespace std;
 #define PolarCircle 5  
 #define Save 6 
 #define Load 7
-#define Exit 7
+#define Exit 8
+#define MidPointBresenham 9
+#define FastMidPointCircle 10
+
 void loadVector (HDC hdc, COLORREF color);
 void saveVector ();
 void drowLineMidPoint(int x1,int y1,int x2,int y2,COLORREF color,HDC hdc);
@@ -65,7 +68,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam) 
 			               
 			AppendMenu(hCircle, MF_STRING, CartesianCircle, "CartesianCircle");
 			AppendMenu(hCircle, MF_STRING, PolarCircle, "PolarCircle");
-			                
+			AppendMenu(hCircle, MF_STRING, MidPointBresenham, "MidPoint_Bresenham");             
+			AppendMenu(hCircle, MF_STRING, FastMidPointCircle, "MidPoint_Fast");
+			
 			
 			SetMenu(hwnd, hMenubar);
 			break;
@@ -89,7 +94,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam) 
 			}
 			else if(LOWORD(wParam) == Exit)
 			{
-				
+				PostQuitMessage(0);
 			}
 			//////////////////////////////////////////
 			// Line
@@ -123,6 +128,17 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam) 
 				status = PolarCircle;
 			}
 			
+			else if(LOWORD(wParam) == MidPointBresenham)
+			{
+				firstClick = true;
+				status = MidPointBresenham;
+			}
+			
+			else if(LOWORD(wParam) == FastMidPointCircle)
+			{
+				firstClick = true;
+				status = FastMidPointCircle;
+			}
 			
 			
 			// add new actions here
@@ -173,6 +189,22 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam) 
 	            	c.polar( color, hdc);
 	            	allShapes.push_back(c);
 	            }
+	            
+	            else if(status == MidPointBresenham)
+	            {
+	            	Circle c (status, x_1, y_1, xPos, yPos) ;
+	            	c.bresenham( color, hdc);
+	            	allShapes.push_back(c);
+	            }
+	            
+	            else if(status == FastMidPointCircle)
+	            {
+	            	Circle c (status, x_1, y_1, xPos, yPos) ;
+	            	c.fastBresenham( color, hdc);
+	            	allShapes.push_back(c);
+	            }
+	            
+	            
 	            
 	            // and so on
 	            ReleaseDC(hwnd,hdc);
